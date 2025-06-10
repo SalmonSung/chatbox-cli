@@ -1,0 +1,4 @@
+temp/
+.env
+.venv/
+src/chatbox_cli.egg-info
