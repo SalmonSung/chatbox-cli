@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/41426022-09fa-4de2-8481-946ba8701247)
+
 # chatbox-cli  
 chatbox-cli is a command-line interface tool for interacting with LangGraph. It offers seamless support for `interrupt` and resuming graph execution, making it easy to manage your workflows directly from the terminal.
 > [!Note]  
