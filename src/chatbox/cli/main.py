@@ -29,7 +29,7 @@ def chat(repeat):
             print(f"{Fore.YELLOW}{Style.NORMAL}Session ended. Goodbye!")
             break
         results, is_done = asyncio.run(agent.run_graph(user_message))
-        print(f"Results: {results}, is_done: {is_done}")
+        # print(f"Results: {results}, is_done: {is_done}")
         while not is_done:
             user_message = click.prompt(click.style(results, fg="cyan"))
             results, is_done = asyncio.run(agent.resume_graph(user_message))

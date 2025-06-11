@@ -116,20 +116,20 @@ class AgentBuilder:
 
 
 
-    async def run(self, file_path: str):
-        """
-        Run the graph asynchronously for a given input file.
-        """
-        event = {"orig_file_path": file_path}
-        results = []
-
-        async for s in self.graph.astream(event, self.thread, stream_mode="updates"):
-            # print("================================")
-            # print(s)
-            print("running...")
-            results.append(s)
-
-        return results[-1]['response2file']["tool_save_path"]
+    # async def run(self, file_path: str):
+    #     """
+    #     Run the graph asynchronously for a given input file.
+    #     """
+    #     event = {"orig_file_path": file_path}
+    #     results = []
+    #
+    #     async for s in self.graph.astream(event, self.thread, stream_mode="updates"):
+    #         # print("================================")
+    #         # print(s)
+    #         print("running...")
+    #         results.append(s)
+    #
+    #     return results[-1]['response2file']["tool_save_path"]
 
 
 # if __name__ == "__main__":

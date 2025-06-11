@@ -7,7 +7,7 @@ from .state import *
 
 def human_review(state: SectionState, config: RunnableConfig):
     configurable = Configuration.from_runnable_config(config)
-    human_reviews = interrupt("What is your opinion?")
+    human_reviews = interrupt("Where do you live?")
     return {"conclusion": human_reviews}
 
 builder = StateGraph(SectionState, input=SectionInput, output=SectionOutput, config_schema=Configuration)
