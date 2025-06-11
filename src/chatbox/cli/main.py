@@ -18,7 +18,7 @@ def cli():
 @click.option('--repeat', default=2, help='Number of chat turns (demo).')
 def chat(repeat):
     """Start a chatbox session."""
-    agent = AgentBuilder(save_history="disable")
+    agent = AgentBuilder(save_history="disabled")
     print("Starting Chatbox Session!\n")
     for _ in range(repeat):
         is_done = False

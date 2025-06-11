@@ -1,5 +1,5 @@
 from langgraph.types import Command
-
+from typing import Literal
 import uuid
 import aiosqlite
 from langgraph.checkpoint.memory import MemorySaver
@@ -8,15 +8,16 @@ from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 from .graph import builder
 from config import *
 
+
 class AgentBuilder:
     def __init__(
-        self,
-        planner_provider="openai",
-        planner_model="o3-mini",
-        writer_provider="openai",
-        writer_model="gpt-4.1-nano",
-        save_history="disabled",
-        max_tokens=32768,
+            self,
+            planner_provider="openai",
+            planner_model="o3-mini",
+            writer_provider="openai",
+            writer_model="gpt-4.1-nano",
+            save_history: Literal["disabled", "enabled"] = "disabled",
+            max_tokens=32768,
     ):
         self.planner_provider = planner_provider
         self.planner_model = planner_model
@@ -77,9 +78,7 @@ class AgentBuilder:
 
         # final_state = self.graph.get_state(thread)
 
-
         # final_output = final_state.values.get("conclusion")
-
 
     async def resume_graph(self, resume: str):
         thread = {"configurable": {"thread_id": self.thread_id}}
@@ -96,25 +95,21 @@ class AgentBuilder:
                 memory = AsyncSqliteSaver(conn)
                 graph = builder.compile(checkpointer=memory)
                 async for event in graph.astream(Command(resume=resume), thread, stream_mode="updates"):
-                    print("========================")
-                    print(type(event))
-                    print(event)
+                    # print("========================")
+                    # print(type(event))
+                    # print(event)
                     if '__interrupt__' in event:
                         interrupt_value = event['__interrupt__'][0].value
                         return interrupt_value, False
                 # final_state = graph.get_state(thread)
                 final_state = await graph.aget_state(thread)
-                print(f"final_state: {final_state}")
+                # print(f"final_state: {final_state}")
                 final_output = final_state.values.get("conclusion")
                 return final_output, True
 
         final_state = self.graph.get_state(thread)
         final_output = final_state.values.get("conclusion")
         return final_output, True
-
-
-
-
 
     # async def run(self, file_path: str):
     #     """
@@ -130,7 +125,6 @@ class AgentBuilder:
     #         results.append(s)
     #
     #     return results[-1]['response2file']["tool_save_path"]
-
 
 # if __name__ == "__main__":
 #     import asyncio

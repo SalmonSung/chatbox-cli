@@ -8,7 +8,8 @@ from .state import *
 def human_review(state: SectionState, config: RunnableConfig):
     configurable = Configuration.from_runnable_config(config)
     human_reviews = interrupt("Where do you live?")
-    return {"conclusion": human_reviews}
+    result = f"The weather in {human_reviews} tomorrow is 35 degree."
+    return {"conclusion": result}
 
 builder = StateGraph(SectionState, input=SectionInput, output=SectionOutput, config_schema=Configuration)
 builder.add_node("human_review", human_review)
